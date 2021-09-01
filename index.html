@@ -34,18 +34,68 @@
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script type="text/javascript">
-  // console.log(React)
-  // console.log(ReactDOM)
 
-  const root = document.querySelector('#root');
-  const btn_plus = document.querySelector('#btn_plus');
+  // React 출력해보기
 
-  let i = 0;
+  console.log(React)
+  console.log(ReactDOM)
 
-  root.innerHTML = '<p>init : 0</p>'
-  btn_plus.addEventListener('click', ()=> {
-    root.innerHTML = `<p>init: ${++i}</p>`;
-  })
+  // 고전 프론트엔드
+
+  // const root = document.querySelector('#root');
+  // const btn_plus = document.querySelector('#btn_plus');
+
+  // let i = 0;
+
+  // root.innerHTML = '<p>init : 0</p>'
+  // btn_plus.addEventListener('click', ()=> {
+  //   root.innerHTML = `<p>init: ${++i}</p>`;
+  // });
+  // component 안에는 데이터들이 들어있다.
+
+  // 컴포넌트 프론트엔드
+
+  // const component = {
+  //   // 초기값 작성
+  //   message: 'init',
+  //   count: 0,
+  //   // HTML로 어떻게 표출하는지 작성
+  //   // 데이터들이 HTML로 어떻게 표현되는지에 대한 결과물
+  //   render() {
+  //     return `<p>${this.message} : ${this.count}</p>`;
+  //   }
+  // };
+  // // functiion render(실제 DOM, 우리가 만든 컴포넌트)
+  // function render(rootElement, component) {
+  //   rootElement.innerHTML = component.render();
+  // }
+  // //초기화 단계
+  // render(document.querySelector('#root'), component);
+
+  // document.querySelector('#btn_plus').addEventListener('click', () => {
+  //   // 값 변경
+  //   component.message = 'update';
+  //   component.count = component.count + 1;
+
+  //   // 값 변경 후엔는 이렇게 render의 과정이 따른다.
+  //   render(document.querySelector('#root'), component);
+  // })
+
+    const Component = props => {
+      // retuen을 통해서 HTML DOM을 표출하는데, React를 통해서 할 때는 실제 DOM형식이 아니라 React의 형식을 따른다.
+      // <p hello='world'>  Hi </p>
+      // React.createElement('p', hello='world', Hi)
+      return React.createElement('p', null, `${props.message} : ${props.count}`)
+    }
+
+    // ReactDOM.render(/* 리액트 컴포넌트*/, /* 실제 DOM */);
+    // 여기에서는 실제 사용 방식과 다르게 한 것이다.
+    // 그래도 조금 더 과정을 알 수 있도록 작성한 것이다.
+    ReactDOM.render(React.createElement(Component, {message: 'init', count: 0}, null), document.querySelector('#root'));
+
+    document.querySelector('#btn_plus', addEventListener('click', () => {
+      ReactDOM.render(React.createElement(Component, {message: 'update', count: 10}, null), document.querySelector('#root'));
+    }))
   </script>
 </body>
 
