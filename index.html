@@ -12,79 +12,29 @@
   <div id="root"></div>
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     console.log(React);
     console.log(ReactDOM);
 
-    // React.createElement(
-    //   type, // 태그 이름 문자열 | 리액트 컴포넌트 | React.Freagment
-    //   [props], // 리액트 컴포넌트에 넣어주는 데이터 객체
-    //   [ ... children ] // 자식으로 넣어주는 요소들
-    // );
-
-    // 1. 태그 이름 문자열 type
-    // <h1>type 이 "태그 이름 문자열" 입니다.</h1> 이런 모습으로 생성됨
-    // ReactDOM.render(
-    //   React.createElement('h1', null, `type 이 "태그 이름 문자열" 입니다.`), // 이거는 만들기만 한 것
-    //   document.querySelector('#root') //여기에 실제 DOM에 넣어준다.
-    // );
-
-    // 2. 리액트 컴포넌트 type
-    // const Component = () => {
-    //   return React.createElement(
-    //     'p',
-    //     null,
-    //     `type 이 "React 컴포넌트" 입니다.`
-    //   );
-    // }
-
-    // // <Component></ Component> => <Component /> => <p>type이 "React 컴포넌트"입니다.</p>
-    // ReactDOM.render(
-    //   React.createElement(Component, null, null),
-    //   document.querySelector('#root')
-    // );
-
-    // 3. React.Fragment
-    // ReactDOM.render(
-    //   React.createElement(
-    //     React.Fragment,
-    //     null,
-    //     `type 이 "React Fragment" 입니다.`,
-    //     `type 이 "React Fragment" 입니다.`,
-    //     `type 이 "React Fragment" 입니다.`
-    //   ),
-    //   document.querySelector("#root")
-    // )
-
     // 4. 복잡한 리액트 엘리먼트 모임
 
-    //   <div>
-    //   <div>
-    //     <h1>주제</h1>
-    //     <ul>
-    //       <li>React</li>
-    //       <li>Vue</li>
-    //     </ul>
-    //   </div>
-    // </div>
+    // 우리가 작성한 어떤 코드를 => 순수하게 실행할 수 있는 자바스크립트
+    // Babel에 의해서 변환하면 된다.
+
+    const title = '주제!!'
 
     ReactDOM.render(
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement('h1', null, `주제`),
-          React.createElement(
-            'ul',
-            null,
-            React.createElement('li', null, `React`),
-            React.createElement('li', null, `Vue`)
-          )
-        )
-      ),
+        <div>
+        <div>
+          <h1>{title}</h1>
+          <ul>
+            <li>React</li>
+            <li>Vue</li>
+          </ul>
+        </div>
+      </div>
+      ,
       document.querySelector('#root')
     )
   </script>
