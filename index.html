@@ -17,30 +17,66 @@
     console.log(React);
     console.log(ReactDOM);
 
-    class Component extends React.Component {
-      state = {
-        count: 0,
+   class App extends React.Component {
+     state = {
+       age: 39,
+     };
+     interval = null;
+     constructor(props){
+       super(props);
+       console.log('constructor', props); // constructor 부분
+     }
+     render() { // 결국 이 render()도 오버라이딩 하는게 아닌가.. 질문?
+       console.log('render'); // 이 부분이 마운트 부분
+       return(
+         <div>
+          <h1>
+            Hello {this.props.name} - {this.state.age}
+          </h1>
+         </div>
+       );
       };
+      componentWillMount() { // 오버라이딩 하는 부분
+        console.log('componentWillMount');
+      };
+      componentDidMount() {
+        console.log('componentDidMount');
 
-      render() {
-        return (
-          <div>
-            <p>{this.state.count}</p>
-            <button onClick = {this.click}>클릭</button>
-          </div>
-        );
+        this.interval = setInterval(() => {
+          console.log("setInterval");
+          this.setState(state => ({
+            ...state,
+            age: state.age + 1,
+          }))
+        }, 1000)
       }
 
-      click = () => {
-        console.log("clicked");
-             this.setState((state) => ({
-               ... state,
-               count: state.count + 1,
-             }));
+      componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps', nextProps);
+      }
+      shouldComponentUpdate(nextProps, nextState){
+        console.log('shouldComponentUpdate', nextProps, nextState);
+
+        // shouldComponentUpdate()에서는 return true Or false가 반드시 되어야 한다.
+        return false;
+      }
+      componentWillUpdate(nextProps, nextState){
+        console.log('componentWillUpdate', nextProps, nextState);
+      }
+      // 여기서는 render가 된 이후
+      componentDidUpdate(prevProps, prevState){
+        console.log('componentDidUpdate', prevProps, prevState);
+      }
+      componentWillUnmount(){
+        this.interval = clearInterval();
       }
     }
 
-    ReactDOM.render(<Component />, document.querySelector('#root'))
+    App.defaultProps = {
+      name: 'Sam',
+    };
+
+    ReactDOM.render(<App name = 'Mark' />, document.querySelector('#root'));
   </script>
 </body>
 
