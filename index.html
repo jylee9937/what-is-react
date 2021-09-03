@@ -18,51 +18,28 @@
     console.log(ReactDOM);
 
     class Component extends React.Component {
-      // state 정의1
-      // state = {
-      //   count: 0,
-      // };
+      state = {
+        count: 0,
+      };
 
-      // 정의2
-      constructor(props) {
-        super(props);
-
-        // 
-        this.state = { count: 0 };
-      }
-
-      // React.Component에 props라는 객체가 선언되어 있는 것 같다.
       render() {
         return (
           <div>
-            <h1>{this.props.message} 이것은 클래스로 만든 컴포넌트입니다.</h1>
             <p>{this.state.count}</p>
+            <button onClick = {this.click}>클릭</button>
           </div>
-          );
+        );
       }
 
-      componentDidMount() {
-        setTimeout(() => {
-
-          // this.state.count = this.state.count + 1;
-          // this.setState({
-          //   count: this.state.count + 1,
-          // });
-          this.setState((previousState) => {
-            const newState = {
-              count: previousState.count + 1,
-            };
-              return newState;
-          })
-        }, 1000)
+      click = () => {
+        console.log("clicked");
+             this.setState((state) => ({
+               ... state,
+               count: state.count + 1,
+             }));
       }
-
-      static defaultProps = {
-        message: "기본값2",
-      };
     }
 
-    // message가 {message: "안녕하세요"}라는 객체로 props에 들어간다고 한다.
     ReactDOM.render(<Component />, document.querySelector('#root'))
   </script>
 </body>
