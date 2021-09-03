@@ -17,26 +17,53 @@
     console.log(React);
     console.log(ReactDOM);
 
-    // 4. 복잡한 리액트 엘리먼트 모임
+    class Component extends React.Component {
+      // state 정의1
+      // state = {
+      //   count: 0,
+      // };
 
-    // 우리가 작성한 어떤 코드를 => 순수하게 실행할 수 있는 자바스크립트
-    // Babel에 의해서 변환하면 된다.
+      // 정의2
+      constructor(props) {
+        super(props);
 
-    const title = '주제!!'
+        // 
+        this.state = { count: 0 };
+      }
 
-    ReactDOM.render(
-        <div>
-        <div>
-          <h1>{title}</h1>
-          <ul>
-            <li>React</li>
-            <li>Vue</li>
-          </ul>
-        </div>
-      </div>
-      ,
-      document.querySelector('#root')
-    )
+      // React.Component에 props라는 객체가 선언되어 있는 것 같다.
+      render() {
+        return (
+          <div>
+            <h1>{this.props.message} 이것은 클래스로 만든 컴포넌트입니다.</h1>
+            <p>{this.state.count}</p>
+          </div>
+          );
+      }
+
+      componentDidMount() {
+        setTimeout(() => {
+
+          // this.state.count = this.state.count + 1;
+          // this.setState({
+          //   count: this.state.count + 1,
+          // });
+          this.setState((previousState) => {
+            const newState = {
+              count: previousState.count + 1,
+            };
+              return newState;
+          })
+        }, 1000)
+      }
+
+      static defaultProps = {
+        message: "기본값2",
+      };
+    }
+
+    // message가 {message: "안녕하세요"}라는 객체로 props에 들어간다고 한다.
+    ReactDOM.render(<Component />, document.querySelector('#root'))
   </script>
 </body>
 
